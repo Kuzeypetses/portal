@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kuzey Pet şirket içi uygulama portalı" />
+  <meta name="theme-color" content="#2d3348" />
+  <title>Kuzey Pet Portal</title>
+
+  <style>
+    :root {
+      --navy: #2d3348;
+      --red: #cc2127;
+      --background: #f4f5f8;
+      --white: #ffffff;
+      --text-soft: #687086;
+      --shadow: 0 14px 40px rgba(45, 51, 72, 0.13);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+      margin: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--navy);
+      background:
+        radial-gradient(circle at top left, rgba(204, 33, 39, 0.08), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(45, 51, 72, 0.10), transparent 35%),
+        var(--background);
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-line {
+      height: 6px;
+      background: linear-gradient(90deg, var(--red), var(--navy));
+    }
+
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: auto;
+      padding: 46px 0 36px;
+      text-align: center;
+    }
+
+    .portal-logo {
+      width: min(560px, 88vw);
+      height: auto;
+      display: block;
+      margin: 0 auto 20px;
+      object-fit: contain;
+    }
+
+    .subtitle {
+      max-width: 680px;
+      margin: 0 auto 34px;
+      color: var(--text-soft);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .apps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .app-card {
+      min-height: 285px;
+      padding: 26px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      text-decoration: none;
+      color: var(--navy);
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(45, 51, 72, 0.10);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .app-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(204, 33, 39, 0.45);
+      box-shadow: 0 22px 48px rgba(45, 51, 72, 0.20);
+    }
+
+    .app-card:focus-visible {
+      outline: 4px solid rgba(204, 33, 39, 0.25);
+      outline-offset: 4px;
+    }
+
+    .logo-area {
+      width:100%;
+      height:170px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px;
+    }
+
+    .app-logo{
+      width:180px;
+      height:120px;
+      object-fit:contain;
+      object-position:center;
+      display:block;
+    }
+
+    .app-name {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.25;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+
+    .open-button {
+      width: 100%;
+      padding: 13px 18px;
+      border-radius: 12px;
+      color: var(--white);
+      background: var(--navy);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      transition: background 180ms ease;
+    }
+
+    .app-card:hover .open-button {
+      background: var(--red);
+    }
+
+    footer {
+      padding: 22px 16px;
+      text-align: center;
+      color: #7a8193;
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        padding-top: 32px;
+      }
+
+      .apps {
+        grid-template-columns: 1fr;
+        max-width: 560px;
+        margin: 0 auto;
+      }
+
+      .app-card {
+        min-height: 245px;
+      }
+
+      .logo-area {
+        height:170px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main {
+        width: min(100% - 22px, 1180px);
+      }
+
+      .portal-logo {
+        width: 94vw;
+      }
+
+      .subtitle {
+        font-size: 14px;
+        margin-bottom: 24px;
+      }
+
+      .app-card {
+        border-radius: 18px;
+        padding: 20px 18px;
+      }
+
+      .app-name {
+        font-size: 17px;
+      }
+    }
+  
+body{
+  background-color:#f7f8fb !important;
+  background-image:
+    linear-gradient(rgba(255,255,255,.82),rgba(255,255,255,.82)),
+    url('background.png') !important;
+  background-repeat:repeat !important;
+  background-size:cover !important;
+  background-attachment:fixed !important;
+}
+
+</style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="top-line"></div>
+
+    <main>
+      <img
+        class="portal-logo"
+        src="logoportal.png"
+        alt="Kuzey Pet Portal"
+      />
+
+      <p class="subtitle">
+        Şirket içi uygulamalara hızlı ve güvenli erişim portalı
+      </p>
+
+      <section class="apps" aria-label="Kuzey Pet uygulamaları">
+        <a
+          class="app-card"
+          href="https://kuzeypet-ses-2026.salesexcellencesystem-382.workers.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Sales Excellence System uygulamasını aç"
+        >
+          <div class="logo-area">
+            <img class="app-logo" src="seslogo.png" alt="Sales Excellence System logosu" />
+          </div>
+          <h2 class="app-name">SALES EXCELLENCE SYSTEM</h2>
+          <span class="open-button">UYGULAMAYI AÇ</span>
+        </a>
+
+        <a
+          class="app-card"
+          href="https://ordersys.salesexcellencesystem-382.workers.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Order System uygulamasını aç"
+        >
+          <div class="logo-area">
+            <img class="app-logo" src="order.png" alt="Order System logosu" />
+          </div>
+          <h2 class="app-name">ORDER SYSTEM</h2>
+          <span class="open-button">UYGULAMAYI AÇ</span>
+        </a>
+
+        <a
+          class="app-card"
+          href="https://kmcounter.salesexcellencesystem-382.workers.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="KM Counter uygulamasını aç"
+        >
+          <div class="logo-area">
+            <img class="app-logo" src="counter.png" alt="KM Counter logosu" />
+          </div>
+          <h2 class="app-name">KM COUNTER</h2>
+          <span class="open-button">UYGULAMAYI AÇ</span>
+        </a>
+      </section>
+    </main>
+
+    <footer>
+      Tüm hakları Kuzey Pet'e aittir.
+    </footer>
+  </div>
+</body>
+</html>
