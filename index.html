@@ -153,9 +153,161 @@
       font-size: 13px;
     }
 
+
+    .portal-dashboard {
+      display: grid;
+      grid-template-columns: minmax(250px, 0.8fr) minmax(0, 2.2fr);
+      gap: 24px;
+      margin: 0 0 28px;
+      text-align: left;
+    }
+
+    .info-panel,
+    .weather-panel {
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(45, 51, 72, 0.10);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .info-panel {
+      min-height: 158px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .panel-label {
+      margin-bottom: 8px;
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+    }
+
+    .current-time {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(34px, 4vw, 48px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -1px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .current-date {
+      margin-top: 12px;
+      color: var(--text-soft);
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .weather-panel {
+      padding: 20px;
+    }
+
+    .weather-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0 2px 16px;
+    }
+
+    .weather-heading h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .weather-updated {
+      color: var(--text-soft);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .weather-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .weather-card {
+      min-height: 112px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-areas:
+        "icon city"
+        "icon temp"
+        "desc desc";
+      column-gap: 12px;
+      align-items: center;
+      background: #f7f8fb;
+      border: 1px solid rgba(45, 51, 72, 0.08);
+      border-radius: 16px;
+    }
+
+    .weather-icon {
+      grid-area: icon;
+      width: 46px;
+      text-align: center;
+      font-size: 36px;
+      line-height: 1;
+    }
+
+    .weather-city {
+      grid-area: city;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .weather-temp {
+      grid-area: temp;
+      margin-top: 3px;
+      font-size: 26px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .weather-desc {
+      grid-area: desc;
+      margin-top: 10px;
+      color: var(--text-soft);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .weather-error {
+      grid-column: 1 / -1;
+      padding: 18px;
+      color: var(--text-soft);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .order-logo {
+      transform: scale(1.2);
+    }
+
     @media (max-width: 900px) {
       main {
         padding-top: 32px;
+      }
+
+      .portal-dashboard {
+        grid-template-columns: 1fr;
+        max-width: 720px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .weather-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       .apps {
@@ -185,6 +337,34 @@
       .subtitle {
         font-size: 14px;
         margin-bottom: 24px;
+      }
+
+      .portal-dashboard {
+        gap: 16px;
+        margin-bottom: 22px;
+      }
+
+      .info-panel,
+      .weather-panel {
+        border-radius: 18px;
+      }
+
+      .info-panel {
+        min-height: 135px;
+        padding: 20px;
+      }
+
+      .weather-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .weather-card {
+        min-height: 96px;
+      }
+
+      .weather-heading {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
       .app-card {
@@ -225,6 +405,25 @@ body{
         Şirket içi uygulamalara hızlı ve güvenli erişim portalı
       </p>
 
+      <section class="portal-dashboard" aria-label="Portal bilgi paneli">
+        <div class="info-panel">
+          <span class="panel-label">Bugün</span>
+          <div class="current-time" id="current-time">--:--:--</div>
+          <div class="current-date" id="current-date">Tarih bilgisi yükleniyor...</div>
+        </div>
+
+        <div class="weather-panel">
+          <div class="weather-heading">
+            <h2>Canlı Hava Durumu</h2>
+            <span class="weather-updated" id="weather-updated">Güncelleniyor...</span>
+          </div>
+
+          <div class="weather-grid" id="weather-grid" aria-live="polite">
+            <div class="weather-error">Hava durumu bilgileri yükleniyor...</div>
+          </div>
+        </div>
+      </section>
+
       <section class="apps" aria-label="Kuzey Pet uygulamaları">
         <a
           class="app-card"
@@ -248,7 +447,7 @@ body{
           aria-label="Order System uygulamasını aç"
         >
           <div class="logo-area">
-            <img class="app-logo" src="order.png" alt="Order System logosu" />
+            <img class="app-logo order-logo" src="order.png" alt="Order System logosu" />
           </div>
           <h2 class="app-name">ORDER SYSTEM</h2>
           <span class="open-button">UYGULAMAYI AÇ</span>
@@ -274,5 +473,132 @@ body{
       Tüm hakları Kuzey Pet'e aittir.
     </footer>
   </div>
+
+  <script>
+    const cities = [
+      { name: "İstanbul", latitude: 41.0082, longitude: 28.9784 },
+      { name: "Adana", latitude: 37.0000, longitude: 35.3213 },
+      { name: "Antalya", latitude: 36.8969, longitude: 30.7133 }
+    ];
+
+    function updateClock() {
+      const now = new Date();
+
+      document.getElementById("current-time").textContent =
+        new Intl.DateTimeFormat("tr-TR", {
+          timeZone: "Europe/Istanbul",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false
+        }).format(now);
+
+      document.getElementById("current-date").textContent =
+        new Intl.DateTimeFormat("tr-TR", {
+          timeZone: "Europe/Istanbul",
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        }).format(now);
+    }
+
+    function weatherDetails(code, isDay) {
+      const map = {
+        0: [isDay ? "☀️" : "🌙", "Açık"],
+        1: [isDay ? "🌤️" : "🌙", "Çoğunlukla açık"],
+        2: ["⛅", "Parçalı bulutlu"],
+        3: ["☁️", "Kapalı"],
+        45: ["🌫️", "Sisli"],
+        48: ["🌫️", "Kırağılı sis"],
+        51: ["🌦️", "Hafif çisenti"],
+        53: ["🌦️", "Çisenti"],
+        55: ["🌧️", "Yoğun çisenti"],
+        56: ["🌧️", "Hafif donan çisenti"],
+        57: ["🌧️", "Yoğun donan çisenti"],
+        61: ["🌦️", "Hafif yağmur"],
+        63: ["🌧️", "Yağmurlu"],
+        65: ["🌧️", "Kuvvetli yağmur"],
+        66: ["🌧️", "Hafif donan yağmur"],
+        67: ["🌧️", "Yoğun donan yağmur"],
+        71: ["🌨️", "Hafif kar"],
+        73: ["🌨️", "Karlı"],
+        75: ["❄️", "Yoğun kar"],
+        77: ["❄️", "Kar taneleri"],
+        80: ["🌦️", "Hafif sağanak"],
+        81: ["🌧️", "Sağanak"],
+        82: ["⛈️", "Kuvvetli sağanak"],
+        85: ["🌨️", "Hafif kar sağanağı"],
+        86: ["❄️", "Kuvvetli kar sağanağı"],
+        95: ["⛈️", "Gök gürültülü"],
+        96: ["⛈️", "Dolu ihtimalli fırtına"],
+        99: ["⛈️", "Kuvvetli dolulu fırtına"]
+      };
+
+      return map[code] || ["🌡️", "Hava durumu"];
+    }
+
+    async function loadWeather() {
+      const grid = document.getElementById("weather-grid");
+      const updated = document.getElementById("weather-updated");
+
+      const latitude = cities.map(city => city.latitude).join(",");
+      const longitude = cities.map(city => city.longitude).join(",");
+      const url =
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}` +
+        `&longitude=${longitude}` +
+        `&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,is_day` +
+        `&temperature_unit=celsius&wind_speed_unit=kmh&timezone=Europe%2FIstanbul`;
+
+      try {
+        const response = await fetch(url, { cache: "no-store" });
+
+        if (!response.ok) {
+          throw new Error("Hava durumu servisine ulaşılamadı.");
+        }
+
+        const result = await response.json();
+        const data = Array.isArray(result) ? result : [result];
+
+        grid.innerHTML = data.map((item, index) => {
+          const city = cities[index];
+          const current = item.current;
+          const [icon, description] = weatherDetails(current.weather_code, current.is_day === 1);
+
+          return `
+            <article class="weather-card">
+              <div class="weather-icon" aria-hidden="true">${icon}</div>
+              <div class="weather-city">${city.name}</div>
+              <div class="weather-temp">${Math.round(current.temperature_2m)}°C</div>
+              <div class="weather-desc">
+                ${description} · Hissedilen ${Math.round(current.apparent_temperature)}°C
+                · Rüzgâr ${Math.round(current.wind_speed_10m)} km/sa
+              </div>
+            </article>
+          `;
+        }).join("");
+
+        updated.textContent =
+          "Son güncelleme: " +
+          new Intl.DateTimeFormat("tr-TR", {
+            timeZone: "Europe/Istanbul",
+            hour: "2-digit",
+            minute: "2-digit"
+          }).format(new Date());
+      } catch (error) {
+        grid.innerHTML =
+          '<div class="weather-error">Hava durumu bilgisi şu anda alınamıyor. İnternet bağlantısını kontrol edin.</div>';
+        updated.textContent = "Bağlantı hatası";
+        console.error(error);
+      }
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    loadWeather();
+    setInterval(loadWeather, 10 * 60 * 1000);
+  </script>
+
 </body>
 </html>
