@@ -30,10 +30,13 @@
     body {
       font-family: Arial, Helvetica, sans-serif;
       color: var(--navy);
-      background:
-        radial-gradient(circle at top left, rgba(204, 33, 39, 0.08), transparent 32%),
-        radial-gradient(circle at bottom right, rgba(45, 51, 72, 0.10), transparent 35%),
-        var(--background);
+      background-color: #f7f8fb !important;
+      background-image:
+        linear-gradient(rgba(255,255,255,.82), rgba(255,255,255,.82)),
+        url('background.png') !important;
+      background-repeat: repeat !important;
+      background-size: cover !important;
+      background-attachment: fixed !important;
     }
 
     .page {
@@ -106,20 +109,20 @@
     }
 
     .logo-area {
-      width:100%;
-      height:170px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:12px;
+      width: 100%;
+      height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
     }
 
-    .app-logo{
-      width:180px;
-      height:120px;
-      object-fit:contain;
-      object-position:center;
-      display:block;
+    .app-logo {
+      width: 180px;
+      height: 120px;
+      object-fit: contain;
+      object-position: center;
+      display: block;
     }
 
     .app-name {
@@ -152,7 +155,6 @@
       color: #7a8193;
       font-size: 13px;
     }
-
 
     .portal-dashboard {
       display: grid;
@@ -294,6 +296,110 @@
       transform: scale(1.2);
     }
 
+    .portal-info-text {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 0 16px;
+      text-align: center;
+      color: var(--navy);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .portal-info-text p {
+      margin: 8px 0;
+    }
+
+    /* Şifre ekranı */
+    .auth-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(244, 245, 248, 0.98);
+      backdrop-filter: blur(8px);
+    }
+
+    .auth-box {
+      width: min(420px, 100%);
+      padding: 36px;
+      background: #ffffff;
+      border: 1px solid rgba(45, 51, 72, 0.10);
+      border-radius: 22px;
+      box-shadow: 0 20px 60px rgba(45, 51, 72, 0.18);
+      text-align: center;
+    }
+
+    .auth-logo {
+      width: min(260px, 80%);
+      height: auto;
+      margin: 0 auto 18px;
+      display: block;
+      object-fit: contain;
+    }
+
+    .auth-box h2 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: 24px;
+    }
+
+    .auth-box p {
+      margin: 0 0 22px;
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .auth-box input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid rgba(45, 51, 72, 0.20);
+      border-radius: 12px;
+      outline: none;
+      font-size: 18px;
+      text-align: center;
+      letter-spacing: 4px;
+    }
+
+    .auth-box input:focus {
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(45, 51, 72, 0.10);
+    }
+
+    .auth-button {
+      width: 100%;
+      margin-top: 14px;
+      padding: 14px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--navy);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 180ms ease;
+    }
+
+    .auth-button:hover {
+      background: var(--red);
+    }
+
+    .auth-error {
+      min-height: 20px;
+      margin-top: 12px;
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .auth-hidden {
+      display: none !important;
+    }
+
     @media (max-width: 900px) {
       main {
         padding-top: 32px;
@@ -321,7 +427,7 @@
       }
 
       .logo-area {
-        height:170px;
+        height: 170px;
       }
     }
 
@@ -375,56 +481,97 @@
       .app-name {
         font-size: 17px;
       }
-    }
-  
-body{
-  background-color:#f7f8fb !important;
-  background-image:
-    linear-gradient(rgba(255,255,255,.82),rgba(255,255,255,.82)),
-    url('background.png') !important;
-  background-repeat:repeat !important;
-  background-size:cover !important;
-  background-attachment:fixed !important;
-}
 
-</style>
+      .auth-box {
+        padding: 28px 22px;
+        border-radius: 18px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+
+  <!-- Şifre ekranı -->
+  <div class="auth-overlay" id="auth-overlay">
+    <div class="auth-box">
+      <img
+        class="auth-logo"
+        src="logoportal.png"
+        alt="Kuzey Pet Portal"
+      />
+
+      <h2>Portal Girişi</h2>
+
+      <p>
+        Devam etmek için portal şifresini giriniz.
+      </p>
+
+      <input
+        type="password"
+        id="portal-password"
+        placeholder="••••••"
+        autocomplete="current-password"
+        inputmode="numeric"
+      />
+
+      <button class="auth-button" id="auth-button">
+        PORTALA GİR
+      </button>
+
+      <div class="auth-error" id="auth-error"></div>
+    </div>
+  </div>
+
   <div class="page">
     <div class="top-line"></div>
 
     <main>
+
       <img
         class="portal-logo"
         src="logoportal.png"
         alt="Kuzey Pet Portal"
-      /> 
+      />
 
-        <p class="subtitle">
-        <b>Şirket içi uygulamalara hızlı erişim portalı. Aşağıdaki servisleri ilgili düğmelere basarak kullanabilirsiniz.</b>
+      <p class="subtitle">
+        <b>
+          Şirket içi uygulamalara hızlı erişim portalı.
+          Aşağıdaki servisleri ilgili düğmelere basarak kullanabilirsiniz.
+        </b>
       </p>
 
       <section class="portal-dashboard" aria-label="Portal bilgi paneli">
+
         <div class="info-panel">
           <span class="panel-label">Bugün</span>
           <div class="current-time" id="current-time">--:--:--</div>
-          <div class="current-date" id="current-date">Tarih bilgisi yükleniyor...</div>
+          <div class="current-date" id="current-date">
+            Tarih bilgisi yükleniyor...
+          </div>
         </div>
 
         <div class="weather-panel">
+
           <div class="weather-heading">
             <h2>Canlı Hava Durumu</h2>
-            <span class="weather-updated" id="weather-updated">Güncelleniyor...</span>
+            <span class="weather-updated" id="weather-updated">
+              Güncelleniyor...
+            </span>
           </div>
 
           <div class="weather-grid" id="weather-grid" aria-live="polite">
-            <div class="weather-error">Hava durumu bilgileri yükleniyor...</div>
+            <div class="weather-error">
+              Hava durumu bilgileri yükleniyor...
+            </div>
           </div>
+
         </div>
+
       </section>
 
       <section class="apps" aria-label="Kuzey Pet uygulamaları">
+
         <a
           class="app-card"
           href="https://kuzeypet-ses-2026.salesexcellencesystem-382.workers.dev"
@@ -433,10 +580,20 @@ body{
           aria-label="Sales Excellence System uygulamasını aç"
         >
           <div class="logo-area">
-            <img class="app-logo" src="seslogo.png" alt="Sales Excellence System logosu" />
+            <img
+              class="app-logo"
+              src="seslogo.png"
+              alt="Sales Excellence System logosu"
+            />
           </div>
-          <h2 class="app-name">SALES EXCELLENCE SYSTEM</h2>
-          <span class="open-button">UYGULAMAYI AÇ</span>
+
+          <h2 class="app-name">
+            SALES EXCELLENCE SYSTEM
+          </h2>
+
+          <span class="open-button">
+            UYGULAMAYI AÇ
+          </span>
         </a>
 
         <a
@@ -447,10 +604,20 @@ body{
           aria-label="Order System uygulamasını aç"
         >
           <div class="logo-area">
-            <img class="app-logo order-logo" src="order.png" alt="Order System logosu" />
+            <img
+              class="app-logo order-logo"
+              src="order.png"
+              alt="Order System logosu"
+            />
           </div>
-          <h2 class="app-name">ORDER SYSTEM</h2>
-          <span class="open-button">UYGULAMAYI AÇ</span>
+
+          <h2 class="app-name">
+            ORDER SYSTEM
+          </h2>
+
+          <span class="open-button">
+            UYGULAMAYI AÇ
+          </span>
         </a>
 
         <a
@@ -461,10 +628,20 @@ body{
           aria-label="KM Counter uygulamasını aç"
         >
           <div class="logo-area">
-            <img class="app-logo" src="counter.png" alt="KM Counter logosu" />
+            <img
+              class="app-logo"
+              src="counter.png"
+              alt="KM Counter logosu"
+            />
           </div>
-          <h2 class="app-name">KM COUNTER</h2>
-          <span class="open-button">UYGULAMAYI AÇ</span>
+
+          <h2 class="app-name">
+            KM COUNTER
+          </h2>
+
+          <span class="open-button">
+            UYGULAMAYI AÇ
+          </span>
         </a>
 
         <a
@@ -475,35 +652,148 @@ body{
           aria-label="New Customer System uygulamasını aç"
         >
           <div class="logo-area">
-            <img class="app-logo" src="musterikayitlogo.png" alt="New Customer System logosu" />
+            <img
+              class="app-logo"
+              src="musterikayitlogo.png"
+              alt="New Customer System logosu"
+            />
           </div>
-          <h2 class="app-name">NEW CUSTOMER SYSTEM</h2>
-          <span class="open-button">UYGULAMAYI AÇ</span>
+
+          <h2 class="app-name">
+            NEW CUSTOMER SYSTEM
+          </h2>
+
+          <span class="open-button">
+            UYGULAMAYI AÇ
+          </span>
         </a>
+
       </section>
+
     </main>
-    
-    <center><b>* Sales Excellence System :</b> Bu servis sayesinde yönetici/satış temsilcisi değerlendirme sistemini kullanabilirsiniz.</p></center>
-        
-    <center><b>* Order System :</b> Bu servis sayesinde rut içi ve rut dışı offline sipariş formlarını oluşturabilirsiniz.</p></center>
-        
-    <center><b>* KM Counter System :</b> Bu servis sayesinde her ay başında şirket aracınızın güncel KM bilgisini ilgili idari işler departmanına paylaşabilirsiniz.</p></center>
-        
-    <center><b>* New Customer System :</b> Dijital Müşteri (Cari) Kayıt formu ile kayıt oluşturabilirsiniz.</p></center>
-      
+
+    <div class="portal-info-text">
+      <p>
+        <b>* Sales Excellence System:</b>
+        Bu servis sayesinde yönetici/satış temsilcisi değerlendirme sistemini kullanabilirsiniz.
+      </p>
+
+      <p>
+        <b>* Order System:</b>
+        Bu servis sayesinde rut içi ve rut dışı offline sipariş formlarını oluşturabilirsiniz.
+      </p>
+
+      <p>
+        <b>* KM Counter System:</b>
+        Bu servis sayesinde her ay başında şirket aracınızın güncel KM bilgisini ilgili idari işler departmanına paylaşabilirsiniz.
+      </p>
+
+      <p>
+        <b>* New Customer System:</b>
+        Dijital Müşteri (Cari) Kayıt formu ile kayıt oluşturabilirsiniz.
+      </p>
+    </div>
+
     <footer>
       Tüm hakları Kuzey Pet'e aittir.
     </footer>
+
   </div>
 
   <script>
+
+    /* ==============================
+       PORTAL ŞİFRE KONTROLÜ
+       ============================== */
+
+    const PORTAL_PASSWORD = "573827";
+
+    const authOverlay = document.getElementById("auth-overlay");
+    const passwordInput = document.getElementById("portal-password");
+    const authButton = document.getElementById("auth-button");
+    const authError = document.getElementById("auth-error");
+
+    function unlockPortal() {
+
+      if (passwordInput.value === PORTAL_PASSWORD) {
+
+        sessionStorage.setItem(
+          "kuzeyPetPortalAuthenticated",
+          "true"
+        );
+
+        authOverlay.classList.add("auth-hidden");
+
+        authError.textContent = "";
+
+      } else {
+
+        authError.textContent =
+          "Şifre hatalı. Lütfen tekrar deneyin.";
+
+        passwordInput.value = "";
+        passwordInput.focus();
+
+      }
+    }
+
+    if (
+      sessionStorage.getItem(
+        "kuzeyPetPortalAuthenticated"
+      ) === "true"
+    ) {
+
+      authOverlay.classList.add("auth-hidden");
+
+    } else {
+
+      setTimeout(() => {
+        passwordInput.focus();
+      }, 100);
+
+    }
+
+    authButton.addEventListener(
+      "click",
+      unlockPortal
+    );
+
+    passwordInput.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Enter") {
+          unlockPortal();
+        }
+
+      }
+    );
+
+
+    /* ==============================
+       SAAT VE HAVA DURUMU
+       ============================== */
+
     const cities = [
-      { name: "İstanbul", latitude: 41.0082, longitude: 28.9784 },
-      { name: "Adana", latitude: 37.0000, longitude: 35.3213 },
-      { name: "Antalya", latitude: 36.8969, longitude: 30.7133 }
+      {
+        name: "İstanbul",
+        latitude: 41.0082,
+        longitude: 28.9784
+      },
+      {
+        name: "Adana",
+        latitude: 37.0000,
+        longitude: 35.3213
+      },
+      {
+        name: "Antalya",
+        latitude: 36.8969,
+        longitude: 30.7133
+      }
     ];
 
     function updateClock() {
+
       const now = new Date();
 
       document.getElementById("current-time").textContent =
@@ -525,7 +815,9 @@ body{
         }).format(now);
     }
 
+
     function weatherDetails(code, isDay) {
+
       const map = {
         0: [isDay ? "☀️" : "🌙", "Açık"],
         1: [isDay ? "🌤️" : "🌙", "Çoğunlukla açık"],
@@ -560,66 +852,146 @@ body{
       return map[code] || ["🌡️", "Hava durumu"];
     }
 
-    async function loadWeather() {
-      const grid = document.getElementById("weather-grid");
-      const updated = document.getElementById("weather-updated");
 
-      const latitude = cities.map(city => city.latitude).join(",");
-      const longitude = cities.map(city => city.longitude).join(",");
+    async function loadWeather() {
+
+      const grid =
+        document.getElementById("weather-grid");
+
+      const updated =
+        document.getElementById("weather-updated");
+
+      const latitude =
+        cities
+          .map(city => city.latitude)
+          .join(",");
+
+      const longitude =
+        cities
+          .map(city => city.longitude)
+          .join(",");
+
       const url =
         `https://api.open-meteo.com/v1/forecast?latitude=${latitude}` +
         `&longitude=${longitude}` +
         `&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,is_day` +
-        `&temperature_unit=celsius&wind_speed_unit=kmh&timezone=Europe%2FIstanbul`;
+        `&temperature_unit=celsius` +
+        `&wind_speed_unit=kmh` +
+        `&timezone=Europe%2FIstanbul`;
 
       try {
-        const response = await fetch(url, { cache: "no-store" });
+
+        const response =
+          await fetch(url, {
+            cache: "no-store"
+          });
 
         if (!response.ok) {
-          throw new Error("Hava durumu servisine ulaşılamadı.");
+          throw new Error(
+            "Hava durumu servisine ulaşılamadı."
+          );
         }
 
-        const result = await response.json();
-        const data = Array.isArray(result) ? result : [result];
+        const result =
+          await response.json();
 
-        grid.innerHTML = data.map((item, index) => {
-          const city = cities[index];
-          const current = item.current;
-          const [icon, description] = weatherDetails(current.weather_code, current.is_day === 1);
+        const data =
+          Array.isArray(result)
+            ? result
+            : [result];
 
-          return `
-            <article class="weather-card">
-              <div class="weather-icon" aria-hidden="true">${icon}</div>
-              <div class="weather-city">${city.name}</div>
-              <div class="weather-temp">${Math.round(current.temperature_2m)}°C</div>
-              <div class="weather-desc">
-                ${description} · Hissedilen ${Math.round(current.apparent_temperature)}°C
-                · Rüzgâr ${Math.round(current.wind_speed_10m)} km/sa
-              </div>
-            </article>
-          `;
-        }).join("");
+        grid.innerHTML =
+          data
+            .map((item, index) => {
+
+              const city =
+                cities[index];
+
+              const current =
+                item.current;
+
+              const [icon, description] =
+                weatherDetails(
+                  current.weather_code,
+                  current.is_day === 1
+                );
+
+              return `
+                <article class="weather-card">
+
+                  <div
+                    class="weather-icon"
+                    aria-hidden="true"
+                  >
+                    ${icon}
+                  </div>
+
+                  <div class="weather-city">
+                    ${city.name}
+                  </div>
+
+                  <div class="weather-temp">
+                    ${Math.round(current.temperature_2m)}°C
+                  </div>
+
+                  <div class="weather-desc">
+
+                    ${description}
+                    · Hissedilen
+                    ${Math.round(current.apparent_temperature)}°C
+
+                    · Rüzgâr
+                    ${Math.round(current.wind_speed_10m)} km/sa
+
+                  </div>
+
+                </article>
+              `;
+
+            })
+            .join("");
 
         updated.textContent =
           "Son güncelleme: " +
-          new Intl.DateTimeFormat("tr-TR", {
-            timeZone: "Europe/Istanbul",
-            hour: "2-digit",
-            minute: "2-digit"
-          }).format(new Date());
+          new Intl.DateTimeFormat(
+            "tr-TR",
+            {
+              timeZone: "Europe/Istanbul",
+              hour: "2-digit",
+              minute: "2-digit"
+            }
+          ).format(new Date());
+
       } catch (error) {
+
         grid.innerHTML =
-          '<div class="weather-error">Hava durumu bilgisi şu anda alınamıyor. İnternet bağlantısını kontrol edin.</div>';
-        updated.textContent = "Bağlantı hatası";
+          '<div class="weather-error">' +
+          'Hava durumu bilgisi şu anda alınamıyor. ' +
+          'İnternet bağlantısını kontrol edin.' +
+          '</div>';
+
+        updated.textContent =
+          "Bağlantı hatası";
+
         console.error(error);
       }
     }
 
+
     updateClock();
-    setInterval(updateClock, 1000);
+
+    setInterval(
+      updateClock,
+      1000
+    );
 
     loadWeather();
-    setInterval(loadWeather, 10 * 60 * 1000);
+
+    setInterval(
+      loadWeather,
+      10 * 60 * 1000
+    );
+
   </script>
 
 </body>
