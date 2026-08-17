@@ -310,7 +310,10 @@
       margin: 8px 0;
     }
 
-    /* Şifre ekranı */
+    /* ==============================
+       ŞİFRE EKRANI
+       ============================== */
+
     .auth-overlay {
       position: fixed;
       inset: 0;
@@ -319,18 +322,38 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: rgba(244, 245, 248, 0.98);
-      backdrop-filter: blur(8px);
+
+      background-color: var(--navy);
+      background-image:
+        linear-gradient(
+          rgba(45, 51, 72, 0.42),
+          rgba(45, 51, 72, 0.42)
+        ),
+        url('background.png');
+
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
     }
 
     .auth-box {
       width: min(420px, 100%);
       padding: 36px;
-      background: #ffffff;
-      border: 1px solid rgba(45, 51, 72, 0.10);
+
+      background: rgba(255, 255, 255, 0.94);
+
+      border: 1px solid rgba(255, 255, 255, 0.50);
       border-radius: 22px;
-      box-shadow: 0 20px 60px rgba(45, 51, 72, 0.18);
+
+      box-shadow:
+        0 24px 70px rgba(22, 28, 48, 0.34),
+        0 4px 18px rgba(22, 28, 48, 0.12);
+
       text-align: center;
+
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .auth-logo {
@@ -363,6 +386,7 @@
       font-size: 18px;
       text-align: center;
       letter-spacing: 4px;
+      background: rgba(255, 255, 255, 0.98);
     }
 
     .auth-box input:focus {
@@ -381,11 +405,14 @@
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
-      transition: background 180ms ease;
+      transition:
+        background 180ms ease,
+        transform 180ms ease;
     }
 
     .auth-button:hover {
       background: var(--red);
+      transform: translateY(-1px);
     }
 
     .auth-error {
@@ -482,6 +509,11 @@
         font-size: 17px;
       }
 
+      .auth-overlay {
+        padding: 16px;
+        background-position: center center;
+      }
+
       .auth-box {
         padding: 28px 22px;
         border-radius: 18px;
@@ -495,6 +527,7 @@
   <!-- Şifre ekranı -->
   <div class="auth-overlay" id="auth-overlay">
     <div class="auth-box">
+
       <img
         class="auth-logo"
         src="logoportal.png"
@@ -520,10 +553,13 @@
       </button>
 
       <div class="auth-error" id="auth-error"></div>
+
     </div>
   </div>
 
+
   <div class="page">
+
     <div class="top-line"></div>
 
     <main>
@@ -541,36 +577,71 @@
         </b>
       </p>
 
+
       <section class="portal-dashboard" aria-label="Portal bilgi paneli">
 
         <div class="info-panel">
-          <span class="panel-label">Bugün</span>
-          <div class="current-time" id="current-time">--:--:--</div>
-          <div class="current-date" id="current-date">
+
+          <span class="panel-label">
+            Bugün
+          </span>
+
+          <div
+            class="current-time"
+            id="current-time"
+          >
+            --:--:--
+          </div>
+
+          <div
+            class="current-date"
+            id="current-date"
+          >
             Tarih bilgisi yükleniyor...
           </div>
+
         </div>
+
 
         <div class="weather-panel">
 
           <div class="weather-heading">
-            <h2>Canlı Hava Durumu</h2>
-            <span class="weather-updated" id="weather-updated">
+
+            <h2>
+              Canlı Hava Durumu
+            </h2>
+
+            <span
+              class="weather-updated"
+              id="weather-updated"
+            >
               Güncelleniyor...
             </span>
+
           </div>
 
-          <div class="weather-grid" id="weather-grid" aria-live="polite">
+
+          <div
+            class="weather-grid"
+            id="weather-grid"
+            aria-live="polite"
+          >
+
             <div class="weather-error">
               Hava durumu bilgileri yükleniyor...
             </div>
+
           </div>
 
         </div>
 
       </section>
 
-      <section class="apps" aria-label="Kuzey Pet uygulamaları">
+
+      <section
+        class="apps"
+        aria-label="Kuzey Pet uygulamaları"
+      >
 
         <a
           class="app-card"
@@ -579,12 +650,15 @@
           rel="noopener noreferrer"
           aria-label="Sales Excellence System uygulamasını aç"
         >
+
           <div class="logo-area">
+
             <img
               class="app-logo"
               src="seslogo.png"
               alt="Sales Excellence System logosu"
             />
+
           </div>
 
           <h2 class="app-name">
@@ -594,7 +668,9 @@
           <span class="open-button">
             UYGULAMAYI AÇ
           </span>
+
         </a>
+
 
         <a
           class="app-card"
@@ -603,12 +679,15 @@
           rel="noopener noreferrer"
           aria-label="Order System uygulamasını aç"
         >
+
           <div class="logo-area">
+
             <img
               class="app-logo order-logo"
               src="order.png"
               alt="Order System logosu"
             />
+
           </div>
 
           <h2 class="app-name">
@@ -618,7 +697,9 @@
           <span class="open-button">
             UYGULAMAYI AÇ
           </span>
+
         </a>
+
 
         <a
           class="app-card"
@@ -627,12 +708,15 @@
           rel="noopener noreferrer"
           aria-label="KM Counter uygulamasını aç"
         >
+
           <div class="logo-area">
+
             <img
               class="app-logo"
               src="counter.png"
               alt="KM Counter logosu"
             />
+
           </div>
 
           <h2 class="app-name">
@@ -642,7 +726,9 @@
           <span class="open-button">
             UYGULAMAYI AÇ
           </span>
+
         </a>
+
 
         <a
           class="app-card"
@@ -651,12 +737,15 @@
           rel="noopener noreferrer"
           aria-label="New Customer System uygulamasını aç"
         >
+
           <div class="logo-area">
+
             <img
               class="app-logo"
               src="musterikayitlogo.png"
               alt="New Customer System logosu"
             />
+
           </div>
 
           <h2 class="app-name">
@@ -666,13 +755,16 @@
           <span class="open-button">
             UYGULAMAYI AÇ
           </span>
+
         </a>
 
       </section>
 
     </main>
 
+
     <div class="portal-info-text">
+
       <p>
         <b>* Sales Excellence System:</b>
         Bu servis sayesinde yönetici/satış temsilcisi değerlendirme sistemini kullanabilirsiniz.
@@ -692,13 +784,16 @@
         <b>* New Customer System:</b>
         Dijital Müşteri (Cari) Kayıt formu ile kayıt oluşturabilirsiniz.
       </p>
+
     </div>
+
 
     <footer>
       Tüm hakları Kuzey Pet'e aittir.
     </footer>
 
   </div>
+
 
   <script>
 
@@ -708,21 +803,33 @@
 
     const PORTAL_PASSWORD = "573827";
 
-    const authOverlay = document.getElementById("auth-overlay");
-    const passwordInput = document.getElementById("portal-password");
-    const authButton = document.getElementById("auth-button");
-    const authError = document.getElementById("auth-error");
+    const authOverlay =
+      document.getElementById("auth-overlay");
+
+    const passwordInput =
+      document.getElementById("portal-password");
+
+    const authButton =
+      document.getElementById("auth-button");
+
+    const authError =
+      document.getElementById("auth-error");
+
 
     function unlockPortal() {
 
-      if (passwordInput.value === PORTAL_PASSWORD) {
+      if (
+        passwordInput.value === PORTAL_PASSWORD
+      ) {
 
         sessionStorage.setItem(
           "kuzeyPetPortalAuthenticated",
           "true"
         );
 
-        authOverlay.classList.add("auth-hidden");
+        authOverlay.classList.add(
+          "auth-hidden"
+        );
 
         authError.textContent = "";
 
@@ -732,10 +839,12 @@
           "Şifre hatalı. Lütfen tekrar deneyin.";
 
         passwordInput.value = "";
+
         passwordInput.focus();
 
       }
     }
+
 
     if (
       sessionStorage.getItem(
@@ -743,7 +852,9 @@
       ) === "true"
     ) {
 
-      authOverlay.classList.add("auth-hidden");
+      authOverlay.classList.add(
+        "auth-hidden"
+      );
 
     } else {
 
@@ -753,10 +864,12 @@
 
     }
 
+
     authButton.addEventListener(
       "click",
       unlockPortal
     );
+
 
     passwordInput.addEventListener(
       "keydown",
@@ -792,33 +905,47 @@
       }
     ];
 
+
     function updateClock() {
 
       const now = new Date();
 
-      document.getElementById("current-time").textContent =
-        new Intl.DateTimeFormat("tr-TR", {
-          timeZone: "Europe/Istanbul",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: false
-        }).format(now);
+      document.getElementById(
+        "current-time"
+      ).textContent =
+        new Intl.DateTimeFormat(
+          "tr-TR",
+          {
+            timeZone: "Europe/Istanbul",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false
+          }
+        ).format(now);
 
-      document.getElementById("current-date").textContent =
-        new Intl.DateTimeFormat("tr-TR", {
-          timeZone: "Europe/Istanbul",
-          weekday: "long",
-          day: "numeric",
-          month: "long",
-          year: "numeric"
-        }).format(now);
+
+      document.getElementById(
+        "current-date"
+      ).textContent =
+        new Intl.DateTimeFormat(
+          "tr-TR",
+          {
+            timeZone: "Europe/Istanbul",
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+          }
+        ).format(now);
+
     }
 
 
     function weatherDetails(code, isDay) {
 
       const map = {
+
         0: [isDay ? "☀️" : "🌙", "Açık"],
         1: [isDay ? "🌤️" : "🌙", "Çoğunlukla açık"],
         2: ["⛅", "Parçalı bulutlu"],
@@ -847,29 +974,39 @@
         95: ["⛈️", "Gök gürültülü"],
         96: ["⛈️", "Dolu ihtimalli fırtına"],
         99: ["⛈️", "Kuvvetli dolulu fırtına"]
+
       };
 
-      return map[code] || ["🌡️", "Hava durumu"];
+      return map[code] ||
+        ["🌡️", "Hava durumu"];
+
     }
 
 
     async function loadWeather() {
 
       const grid =
-        document.getElementById("weather-grid");
+        document.getElementById(
+          "weather-grid"
+        );
 
       const updated =
-        document.getElementById("weather-updated");
+        document.getElementById(
+          "weather-updated"
+        );
+
 
       const latitude =
         cities
           .map(city => city.latitude)
           .join(",");
 
+
       const longitude =
         cities
           .map(city => city.longitude)
           .join(",");
+
 
       const url =
         `https://api.open-meteo.com/v1/forecast?latitude=${latitude}` +
@@ -879,26 +1016,36 @@
         `&wind_speed_unit=kmh` +
         `&timezone=Europe%2FIstanbul`;
 
+
       try {
 
         const response =
-          await fetch(url, {
-            cache: "no-store"
-          });
+          await fetch(
+            url,
+            {
+              cache: "no-store"
+            }
+          );
+
 
         if (!response.ok) {
+
           throw new Error(
             "Hava durumu servisine ulaşılamadı."
           );
+
         }
+
 
         const result =
           await response.json();
+
 
         const data =
           Array.isArray(result)
             ? result
             : [result];
+
 
         grid.innerHTML =
           data
@@ -910,11 +1057,16 @@
               const current =
                 item.current;
 
-              const [icon, description] =
+
+              const [
+                icon,
+                description
+              ] =
                 weatherDetails(
                   current.weather_code,
                   current.is_day === 1
                 );
+
 
               return `
                 <article class="weather-card">
@@ -931,17 +1083,24 @@
                   </div>
 
                   <div class="weather-temp">
-                    ${Math.round(current.temperature_2m)}°C
+                    ${Math.round(
+                      current.temperature_2m
+                    )}°C
                   </div>
 
                   <div class="weather-desc">
 
                     ${description}
+
                     · Hissedilen
-                    ${Math.round(current.apparent_temperature)}°C
+                    ${Math.round(
+                      current.apparent_temperature
+                    )}°C
 
                     · Rüzgâr
-                    ${Math.round(current.wind_speed_10m)} km/sa
+                    ${Math.round(
+                      current.wind_speed_10m
+                    )} km/sa
 
                   </div>
 
@@ -950,6 +1109,7 @@
 
             })
             .join("");
+
 
         updated.textContent =
           "Son güncelleme: " +
@@ -960,7 +1120,10 @@
               hour: "2-digit",
               minute: "2-digit"
             }
-          ).format(new Date());
+          ).format(
+            new Date()
+          );
+
 
       } catch (error) {
 
@@ -970,10 +1133,13 @@
           'İnternet bağlantısını kontrol edin.' +
           '</div>';
 
+
         updated.textContent =
           "Bağlantı hatası";
 
+
         console.error(error);
+
       }
     }
 
